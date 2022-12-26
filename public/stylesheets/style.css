@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url(https://cdna.artstation.com/p/assets/images/images/029/517/660/original/aaron-truehitt-waterfall-animation3.gif?1597804041);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .login,
+  .register {
+    width: 400px;
+    height: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 24px 28px 18px 28px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.921);
+    /* min-height: 400px; */
+  }
+  .login {
+    margin-right: 80px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    /* border-top: 2px solid #3498db; */
+    border-bottom: 2px solid #3498db;
+    line-height: 2;
+    color: #2980b9;
+  }
+  
+  .register h2 {
+    color: #16a085;
+    border-color: #1abc9c;
+  }
+  
+  label {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2980b9;
+  }
+  
+  .register label {
+    color: #16a085;
+  }
+  
+  input {
+    width: 100%;
+    height: 40px;
+    outline: none;
+    margin: 12px 0;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+  }
+  
+  input:focus {
+    border: 2px solid #3498db;
+  }
+  
+  .register input:focus {
+    border-color: #1abc9c;
+  }
+  
+  button {
+    width: 100%;
+    font-size: 18px;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    margin: 24px 0;
+    font-weight: 700;
+  }
+  
+  button:hover {
+    background: #2980b9;
+  }
+  
+  .register button {
+    background: #1abc9c;
+  }
+  .register button:hover {
+    background: #16a085;
+  }
+  style.css
+  2 KB
