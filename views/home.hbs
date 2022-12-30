@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<div class="wrapper">
-			<div class="change-password">
+			<div class="changePassword">
                 <h3>Hi, {{username}}</h3>
                 <h2>Change password</h2>
 				<form action="/" method="post">
@@ -25,7 +25,23 @@
 					<button type="submit">Change</button>
                     <br>
 				</form>
-                <button onclick="logout()">Logout</button>
+					<button onclick="logout()">Logout</button>
+			</div>
+			<div class="changeCharName">
+				<h4 class="beta">(Note: after renaming will lose friends from them and no longer stay in the current clan.)</h4>
+				<h4 class="beta">The above limitations will be fixed later.</h4>
+				<h2>Change ninja name</h2>
+				<form action="/" method="post">
+					<input name="typeOfForm" value="changeCharName" hidden />
+					<label for="">Old ninja name</label>
+					<input type="password" name="oldCharName" id="" />
+					<br />
+					<label for="">New ninja name</label>
+					<input type="password" name="newCharName" />
+					<br />
+					<button type="submit">Change</button>
+                    <br>
+				</form>
 				<button><a href="/items">Items list</a></button>
 				<button><a href="/console">Console</a></button>
 			</div>

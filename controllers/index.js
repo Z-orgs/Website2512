@@ -79,6 +79,39 @@ const postIndex = async (req, res) => {
 					});
 				}
 			}
+		} else if (req.body.typeOfForm == 'changeCharName') {
+			try {
+				const [rows, fields] = await pool.execute('select * from ninja where name = ?', [
+					req.body.oldCharName,
+				]);
+				if (rows.length == 1) {
+					return res.render('home', {
+						title: 'Home',
+						username: req.session.username,
+						msg: 'Ninja name is exsist.',
+					});
+				}
+				await pool.execute('update ninja set name = ? where name = ?', [
+					req.body.newCharName,
+					req.body.oldCharName,
+				]);
+				await pool.execute(`update player set ninja = '["?"]' where username = ?`, [
+					req.body.newCharName,
+					req.session.username,
+				]);
+				return res.render('home', {
+					title: 'Home',
+					username: req.session.username,
+					msg: 'Change ninja name successfully.',
+				});
+			} catch (err) {
+				console.log(err);
+				return res.render('home', {
+					title: 'Home',
+					username: req.session.username,
+					msg: 'Failed.',
+				});
+			}
 		}
 	} catch (error) {
 		console.log(error);

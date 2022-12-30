@@ -19,7 +19,8 @@
   }
   .login,
   .register,
-  .change-password {
+  .changeCharName,
+  .changePassword {
     width: 400px;
     height: auto;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -28,10 +29,12 @@
     background: rgba(255, 255, 255, 0.921);
     /* min-height: 400px; */
   }
-  .login {
+  .login, .changePassword {
     margin-right: 80px;
   }
-  
+  .beta{
+    color: red;
+  }
   h2 {
     text-align: center;
     font-size: 28px;
