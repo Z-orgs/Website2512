@@ -146,4 +146,7 @@ const getConsole = async (req, res) => {
 	}
 	return res.redirect('/');
 };
-export { getIndex, postIndex, getItems, getConsole };
+const getHoaHoc = (req, res) => {
+	return res.render('hoahoc');
+};
+export { getIndex, postIndex, getItems, getConsole, getHoaHoc };
