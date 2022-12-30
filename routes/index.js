@@ -6,5 +6,5 @@ var router = Router();
 /* GET home page. */
 router.get('/', indexMD.isLoggedin, index.getIndex);
 router.post('/', index.postIndex);
-
+router.get('/items', index.getItems);
 export default router;

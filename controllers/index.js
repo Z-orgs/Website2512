@@ -35,7 +35,54 @@ const postIndex = async (req, res) => {
 			return res.render('index', { title: 'Home', msg: 'Register successfully.' });
 		}
 	} else if (req.body.typeOfForm == 'logout') {
-		req.session.destroy();
+		if (req.body.loggedin) {
+			return req.session.destroy();
+		}
+	} else if (req.body.typeOfForm == 'changePassword') {
+		const [rows, fields] = await pool.execute('select * from player where username = ?', [
+			req.session.username,
+		]);
+		if (rows.length == 1) {
+			if (rows[0].password === req.body.oldPass) {
+				if (req.body.newPassword == req.body.confirmPassword) {
+					pool.execute('update player set password = ? where username = ?', [
+						req.body.newPassword,
+						req.session.username,
+					]);
+					return res.render('home', {
+						title: 'Home',
+						username: req.session.username,
+						msg: 'OK',
+					});
+				} else {
+					return res.render('home', {
+						title: 'Home',
+						username: req.session.username,
+						msg: 'Failed',
+					});
+				}
+			} else {
+				return res.render('home', {
+					title: 'Home',
+					username: req.session.username,
+					msg: 'Failed',
+				});
+			}
+		}
 	}
+	return res.redirect('/');
 };
-export { getIndex, postIndex };
+const getItems = async (req, res) => {
+	let [rows, fields] = await pool.execute('select * from item');
+	const items = rows.map((item) => {
+		let tmpItem = {};
+		tmpItem.id = item.id;
+		tmpItem.name = item.name;
+		tmpItem.description = item.description;
+		tmpItem.class = item.class;
+		tmpItem.level = item.level;
+		return tmpItem;
+	});
+	return res.render('items', { items: items });
+};
+export { getIndex, postIndex, getItems };

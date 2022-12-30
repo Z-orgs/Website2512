@@ -17,9 +17,9 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-  
   .login,
-  .register {
+  .register,
+  .change-password {
     width: 400px;
     height: auto;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -100,5 +100,3 @@
   .register button:hover {
     background: #16a085;
   }
-  style.css
-  2 KB

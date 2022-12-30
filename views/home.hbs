@@ -1,18 +1,38 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {{username}}
-    <button onclick="logout()">test</button>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{{ title }}</title>
+		<link rel="stylesheet" href="./stylesheets/style.css" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="change-password">
+                <h3>Hi, {{username}}</h3>
+                <h2>Change password</h2>
+				<form action="/" method="post">
+					<input name="typeOfForm" value="changePassword" hidden />
+					<label for="">Old password</label>
+					<input type="password" name="oldPass" id="" />
+					<br />
+					<label for="">New password</label>
+					<input type="password" name="newPassword" />
+					<br />
+					<label for="">Confirm password</label>
+					<input type="password" name="confirmPassword" />
+					<br />
+					<button type="submit">Change</button>
+                    <br>
+				</form>
+                <button onclick="logout()">Logout</button>
+			</div>
+		</div>
 		<script src="/js/main.js"></script>
 		<script>let msg = "{{ msg }}";
             if(msg !==""){
                  alert(msg);
             }
         </script>
-</body>
-</html>
+	</body>
+</html>;

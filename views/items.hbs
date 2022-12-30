@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <link rel="stylesheet" href="./stylesheets/style.css" />
+</head>
+<body>
+    <div class="wrapperI">
+            {{#each items}}
+    <div class="item" style="margin-bottom: 50px;">
+        <h4>Item: {{this.name}}</h4>
+        <h5>ID: {{this.id}}</h5>
+        <h5>Description: {{this.description}}</h5>
+        <h5>Class: {{this.class}}</h5>
+        <h5>Level: {{this.level}}</h5>
+    </div>
+    {{/each}}
+    </div>
+
+
+    		<script src="/js/main.js"></script>
+		<script>let msg = "{{ msg }}";
+            if(msg !==""){
+                 alert(msg);
+            }
+        </script>
+</body>
+</html>
