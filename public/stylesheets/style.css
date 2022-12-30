@@ -89,6 +89,10 @@
     margin: 24px 0;
     font-weight: 700;
   }
+
+  a{
+    text-decoration: none;  
+  }
   
   button:hover {
     background: #2980b9;

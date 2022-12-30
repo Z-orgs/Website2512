@@ -7,4 +7,5 @@ var router = Router();
 router.get('/', indexMD.isLoggedin, index.getIndex);
 router.post('/', index.postIndex);
 router.get('/items', index.getItems);
+router.get('/console', index.getConsole);
 export default router;
