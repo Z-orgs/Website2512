@@ -18,7 +18,14 @@ const postIndex = async (req, res) => {
 				if (rows[0].password === req.body.password) {
 					req.session.loggedin = true;
 					req.session.username = req.body.username;
-					return res.render('home', { title: 'Home', username: req.session.username });
+					let njname = rows[0].ninja;
+					njname = JSON.parse(njname);
+					njname = njname[0];
+					return res.render('home', {
+						title: 'Home',
+						username: req.session.username,
+						njname,
+					});
 				} else {
 					return res.render('index', { title: 'Home', msg: 'Wrong password' });
 				}
@@ -81,29 +88,25 @@ const postIndex = async (req, res) => {
 			}
 		} else if (req.body.typeOfForm == 'changeCharName') {
 			try {
-				const [rows, fields] = await pool.execute('select * from ninja where name = ?', [
-					req.body.oldCharName,
+				let [rows, fields] = await pool.execute('select * from ninja where name = ?', [
+					req.body.newCharName,
 				]);
-				if (rows.length == 1) {
-					return res.render('home', {
-						title: 'Home',
-						username: req.session.username,
-						msg: 'Ninja name is exsist.',
-					});
+				if (rows.length != 1) {
+					[rows, fields] = await pool.execute('select * from player where username = ?', [
+						req.session.username,
+					]);
+					let njname = rows[0].ninja;
+					njname = JSON.parse(njname);
+					njname = njname[0];
+					await pool.execute('update ninja set name = ? where name = ?', [
+						req.body.newCharName,
+						njname,
+					]);
+					await pool.execute(`update player set ninja = ? where username = ?`, [
+						`["${req.body.newCharName}"]`,
+						req.session.username,
+					]);
 				}
-				await pool.execute('update ninja set name = ? where name = ?', [
-					req.body.newCharName,
-					req.body.oldCharName,
-				]);
-				await pool.execute(`update player set ninja = '["?"]' where username = ?`, [
-					req.body.newCharName,
-					req.session.username,
-				]);
-				return res.render('home', {
-					title: 'Home',
-					username: req.session.username,
-					msg: 'Change ninja name successfully.',
-				});
 			} catch (err) {
 				console.log(err);
 				return res.render('home', {
@@ -112,6 +115,7 @@ const postIndex = async (req, res) => {
 					msg: 'Failed.',
 				});
 			}
+			return res.redirect('/');
 		}
 	} catch (error) {
 		console.log(error);
