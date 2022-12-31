@@ -39,3 +39,6 @@ function lock(username) {
 	});
 	window.location.reload();
 }
+function admin() {
+	window.open('https://www.facebook.com/syhanh.xlsx/');
+}
