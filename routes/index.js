@@ -8,5 +8,10 @@ router.get('/', indexMD.isLoggedin, index.getIndex);
 router.post('/', index.postIndex);
 router.get('/items', index.getItems);
 router.get('/console', index.getConsole);
+router.post('/console', index.postConsole);
+//
+//
+//
+//
 router.get('/hoahoc', index.getHoaHoc);
 export default router;

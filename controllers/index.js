@@ -9,7 +9,7 @@ const postIndex = async (req, res) => {
 				req.body.username,
 			]);
 			if (rows.length == 1) {
-				if (rows[0].lock == 1) {
+				if (rows[0].lockacc == 1) {
 					return res.render('index', {
 						title: 'Home',
 						msg: 'Your account is locked. Contact admin to know more information.',
@@ -45,7 +45,7 @@ const postIndex = async (req, res) => {
 			if (req.body.password !== req.body.confirmPassword) {
 				return res.render('index', { title: 'Home', msg: 'Passwords are not the same.' });
 			} else {
-				await pool.execute('insert into player (username, password) values (?, ?);', [
+				await pool.execute('insert player (username, password, lockacc) values (?, ?, 1)', [
 					req.body.username,
 					req.body.password,
 				]);
@@ -142,11 +142,42 @@ const getItems = async (req, res) => {
 };
 const getConsole = async (req, res) => {
 	if (req.session.username == 'admin') {
-		return res.render('console');
+		const [players, fld1] = await pool.execute('select * from player');
+		return res.render('console', { players });
 	}
 	return res.redirect('/');
+};
+const ConsoleMethod = {
+	unlockAccount: async (req, res) => {
+		if (req.session.username == 'admin') {
+			const username = req.body.username;
+			console.log(username);
+			await pool.execute('update player set lockacc = 0 where username = ?', [username]);
+			return res.redirect('/console');
+		}
+		return res.redirect('/');
+	},
+	lockAccount: async (req, res) => {
+		if (req.session.username == 'admin') {
+			const username = req.body.username;
+			if (username == 'admin') {
+				return res.redirect('/console');
+			}
+			await pool.execute('update player set lockacc = 1 where username = ?', [username]);
+			return res.redirect('/console');
+		}
+		return res.redirect('/');
+	},
+};
+const postConsole = (req, res) => {
+	const action = req.body.action;
+	if (action == 'lock') {
+		ConsoleMethod.lockAccount(req, res);
+	} else if (action == 'unlock') {
+		ConsoleMethod.unlockAccount(req, res);
+	}
 };
 const getHoaHoc = (req, res) => {
 	return res.render('hoahoc');
 };
-export { getIndex, postIndex, getItems, getConsole, getHoaHoc };
+export { getIndex, postIndex, getItems, getConsole, getHoaHoc, postConsole };
