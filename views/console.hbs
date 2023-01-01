@@ -16,6 +16,8 @@
         <h5>Lock: {{this.lockacc}}</h5>
         <button onclick="unlock(`{{this.username}}`);" style="width: 100px;">Unlock</button>
         <button onclick="lock(`{{this.username}}`);" style="width: 100px;">Lock</button>
+        <button onclick="makeAdmin(`{{this.username}}`);" style="width: 100px;">Make admin</button>
+        <button onclick="cancelAdmin(`{{this.username}}`);" style="width: 100px;">Cancel admin</button>
     </div>
     {{/each}}
     <script src="/js/main.js"></script>
