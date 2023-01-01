@@ -18,7 +18,7 @@ const postIndex = async (req, res) => {
 				if (rows[0].password === req.body.password) {
 					req.session.loggedin = true;
 					req.session.username = req.body.username;
-					req.session.role = 'user';
+					req.session.role = rows[0].role;
 					let njname = rows[0].ninja;
 					njname = JSON.parse(njname);
 					njname = njname[0];
@@ -150,30 +150,18 @@ const getConsole = async (req, res) => {
 };
 const ConsoleMethod = {
 	unlockAccount: async (res, username) => {
-		if (username == 'admin') {
-			return res.redirect('/console');
-		}
 		await pool.execute('update player set lockacc = 0 where username = ?', [username]);
 		return res.redirect('/console');
 	},
 	lockAccount: async (res, username) => {
-		if (username == 'admin') {
-			return res.redirect('/console');
-		}
 		await pool.execute('update player set lockacc = 1 where username = ?', [username]);
 		return res.redirect('/console');
 	},
 	makeAdmin: async (res, username) => {
-		if (username == 'admin') {
-			return res.redirect('/console');
-		}
 		await pool.execute('update player set role = ? where username = ?', ['admin', username]);
 		return res.redirect('/console');
 	},
 	cancelAdmin: async (res, username) => {
-		if (username == 'admin') {
-			return res.redirect('/console');
-		}
 		await pool.execute('update player set role = ? where username = ?', ['user', username]);
 		return res.redirect('/console');
 	},
