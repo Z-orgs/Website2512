@@ -1,6 +1,6 @@
 import pool from '../config/database.js';
 const getIndex = (req, res) => {
-	res.render('index', { title: 'Home' });
+	res.render('login', { title: 'Home' });
 };
 const postIndex = async (req, res) => {
 	try {
@@ -10,7 +10,7 @@ const postIndex = async (req, res) => {
 			]);
 			if (rows.length == 1) {
 				if (rows[0].lockacc == 1) {
-					return res.render('index', {
+					return res.render('login', {
 						title: 'Home',
 						msg: 'Your account is locked. Contact admin to know more information.',
 					});
@@ -28,10 +28,10 @@ const postIndex = async (req, res) => {
 						njname,
 					});
 				} else {
-					return res.render('index', { title: 'Home', msg: 'Wrong password' });
+					return res.render('login', { title: 'Home', msg: 'Wrong password' });
 				}
 			} else {
-				return res.render('index', {
+				return res.render('login', {
 					title: 'Home',
 					msg: 'Username was not found.',
 				});
@@ -41,16 +41,16 @@ const postIndex = async (req, res) => {
 				req.body.username,
 			]);
 			if (rows.length == 1) {
-				return res.render('index', { title: 'Home', msg: 'Username is exist.' });
+				return res.render('login', { title: 'Home', msg: 'Username is exist.' });
 			}
 			if (req.body.password !== req.body.confirmPassword) {
-				return res.render('index', { title: 'Home', msg: 'Passwords are not the same.' });
+				return res.render('login', { title: 'Home', msg: 'Passwords are not the same.' });
 			} else {
 				await pool.execute('insert player (username, password, lockacc) values (?, ?, 1)', [
 					req.body.username,
 					req.body.password,
 				]);
-				return res.render('index', { title: 'Home', msg: 'Register successfully.' });
+				return res.render('login', { title: 'Home', msg: 'Register successfully.' });
 			}
 		} else if (req.body.typeOfForm == 'logout') {
 			if (req.session.loggedin) {

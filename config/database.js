@@ -8,13 +8,13 @@ const pool = mysql.createPool({
 	database: process.env.NAME,
 	port: 3306,
 });
-pool.testConnection = async () => {
+pool.testConnection = () => {
 	try {
-		const [rows, fields] = await pool.execute('select * from item');
+		pool.query('select 1 + 1 as test');
+		return true;
 	} catch (err) {
 		console.log(err);
 		return false;
 	}
-	return true;
 };
 export default pool;
