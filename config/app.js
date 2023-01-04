@@ -1,18 +1,14 @@
-import createError from 'http-errors';
 import express, { json, urlencoded } from 'express';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-
+import shortid from 'shortid';
 import indexRouter from '../routes/index.js';
 import usersRouter from '../routes/users.js';
-import pool from './database.js';
-import e from 'express';
-
 var app = express();
 app.use(
 	session({
-		secret: 'keyboard cat',
+		secret: shortid.generate(),
 		resave: false,
 		saveUninitialized: true,
 		cookie: { secure: false },
@@ -27,14 +23,6 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('./public'));
-
-// app.use((req, res, next) => {
-// 	if (pool.testConnection()) {
-// 		next();
-// 	} else {
-// 		return res.render('dbClose');
-// 	}
-// });
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
