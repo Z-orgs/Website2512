@@ -28,13 +28,13 @@ app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('./public'));
 
-app.use((req, res, next) => {
-	if (pool.testConnection()) {
-		next();
-	} else {
-		return res.render('dbClose');
-	}
-});
+// app.use((req, res, next) => {
+// 	if (pool.testConnection()) {
+// 		next();
+// 	} else {
+// 		return res.render('dbClose');
+// 	}
+// });
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

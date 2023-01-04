@@ -151,19 +151,19 @@ const getConsole = async (req, res) => {
 const ConsoleMethod = {
 	unlockAccount: async (res, username) => {
 		await pool.execute('update player set lockacc = 0 where username = ?', [username]);
-		return res.redirect('/console');
+		return res.json({ msg: 'OK' });
 	},
 	lockAccount: async (res, username) => {
 		await pool.execute('update player set lockacc = 1 where username = ?', [username]);
-		return res.redirect('/console');
+		return res.json({ msg: 'OK' });
 	},
 	makeAdmin: async (res, username) => {
 		await pool.execute('update player set role = ? where username = ?', ['admin', username]);
-		return res.redirect('/console');
+		return res.json({ msg: 'OK' });
 	},
 	cancelAdmin: async (res, username) => {
 		await pool.execute('update player set role = ? where username = ?', ['user', username]);
-		return res.redirect('/console');
+		return res.json({ msg: 'OK' });
 	},
 };
 const postConsole = (req, res) => {

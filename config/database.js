@@ -8,13 +8,4 @@ const pool = mysql.createPool({
 	database: process.env.NAME,
 	port: 3306,
 });
-pool.testConnection = () => {
-	try {
-		pool.query('select 1 + 1 as test');
-		return true;
-	} catch (err) {
-		console.log(err);
-		return false;
-	}
-};
 export default pool;

@@ -10,8 +10,9 @@ function logout() {
 		body: JSON.stringify({
 			typeOfForm: 'logout',
 		}),
-	});
-	window.location.reload();
+	})
+		.then((data) => data.json())
+		.then((data) => window.location.reload());
 }
 function unlock(username) {
 	fetch('/console', {
@@ -23,8 +24,9 @@ function unlock(username) {
 			username,
 			action: 'unlock',
 		}),
-	});
-	window.location.reload();
+	})
+		.then((data) => data.json())
+		.then((data) => window.location.reload());
 }
 function lock(username) {
 	fetch('/console', {
@@ -36,8 +38,9 @@ function lock(username) {
 			username,
 			action: 'lock',
 		}),
-	});
-	window.location.reload();
+	})
+		.then((data) => data.json())
+		.then((data) => window.location.reload());
 }
 function makeAdmin(username) {
 	fetch('/console', {
@@ -49,8 +52,9 @@ function makeAdmin(username) {
 			username,
 			action: 'makeAdmin',
 		}),
-	});
-	window.location.reload();
+	})
+		.then((data) => data.json())
+		.then((data) => window.location.reload());
 }
 function cancelAdmin(username) {
 	fetch('/console', {
@@ -62,8 +66,9 @@ function cancelAdmin(username) {
 			username,
 			action: 'cancelAdmin',
 		}),
-	});
-	window.location.reload();
+	})
+		.then((data) => data.json())
+		.then((data) => window.location.reload());
 }
 function admin() {
 	window.open('https://www.facebook.com/syhanh.xlsx/');
