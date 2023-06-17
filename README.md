@@ -22,4 +22,4 @@ We welcome any contributions to the development of Website2512. Please refer to 
 
 ## Support
 
-If you have any questions, issues, or concerns about Website2512, please contact us via email at kwzngvuong@hamsa.co or open a support ticket through our online portal.
+If you have any questions, issues, or concerns about Website2512, please contact us via email at syhanhcbq@gmail.com or open a support ticket through our online portal.
